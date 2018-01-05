@@ -1,6 +1,15 @@
-package net.slipp.web;
+package net.slipp.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+	@Id
+	@GeneratedValue
+	private long Id;
+	
 	private String userId;
 	private String userPw;
 	private String userEmail;
