@@ -49,7 +49,14 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userPw=" + userPw + ", userEmail=" + userEmail + ", userName=" + userName
-				+ "]";
+		return "User [Id=" + Id + ", userId=" + userId + ", userPw=" + userPw + ", userEmail=" + userEmail
+				+ ", userName=" + userName + "]";
+	}
+
+	public void update(User newUser) {
+		// TODO Auto-generated method stub
+		this.userPw = newUser.userPw;
+		this.userEmail = newUser.userEmail;
+		this.userName = newUser.userName;
 	}
 }

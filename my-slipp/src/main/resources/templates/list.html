@@ -41,7 +41,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/users">사용자목록</a></li>
-					<li><a href="/form">회원가입</a></li>
+					<li><a href="/users/form">회원가입</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -55,6 +55,7 @@
 					<th>아이디</th>
 					<th>이름</th>
 					<th>이메일</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,6 +64,7 @@
 					<td>{{userId}}</td>
 					<td>{{userName}}</td>
 					<td>{{userEmail}}</td>
+					<td><a href="/users/{{Id}}/form" role="button" class="btn btn-success">수정</a></td>
 				</tr>
 				{{/users}}
 			</tbody>

@@ -10,9 +10,5 @@ public class TestController {
 	public String Index(Model model){
 		return "index";
 	}
-	@GetMapping("/form")
-	public String Form(){
-		return "form";
-	}
 
 }
