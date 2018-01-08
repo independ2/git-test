@@ -1,5 +1,7 @@
 package net.slipp.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,5 +49,28 @@ public class UserContorller {
 		user.update(newUser);
 		userRepository.save(user);
 		return "redirect:/users";
+	}
+	
+	@GetMapping("/loginForm")
+	public String loginForm(){
+		return "login";
+	}
+	@PostMapping("/login")
+	public String login(String userId, String userPw, HttpSession session){
+		User user = userRepository.findByUserId(userId);
+		if(user == null){
+			return "redirect:/users/loginForm";
+		}
+		if(!userPw.equals(user.getUserPw())){
+			return "redirect:/users/loginForm";
+		}
+		
+		session.setAttribute("loginUser", user);
+		return "redirect:/";
+	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("loginUser");
+		return "redirect:/";
 	}
 }
