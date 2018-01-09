@@ -1,5 +1,6 @@
 package net.slipp.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +10,7 @@ public class User {
 	@Id
 	@GeneratedValue
 	private long Id;
-	
+	@Column(nullable=false, length=20, unique=true)
 	private String userId;
 	private String userPw;
 	private String userEmail;

@@ -34,19 +34,35 @@ public class UserContorller {
 	}
 	
 	@GetMapping("/{Id}/form")
-	public String updateForm(@PathVariable Long Id, Model model){
-		model.addAttribute("user", userRepository.findOne(Id));
+	public String updateForm(@PathVariable Long Id, Model model, HttpSession session){
+		User loginUser = (User)session.getAttribute("loginUser");
+		User user = userRepository.findOne(Id);
+		if(loginUser == null){
+			return "redirect:/users/loginForm";
+		}
+		if(!loginUser.getUserId().equals(user.getUserId())){
+			return "redirect:/";
+		}
+		model.addAttribute("user", user);
 		return "updateForm";
 	}
+	
 	@GetMapping("/form")
 	public String Form(){
 		return "form";
 	}
 	@PostMapping("/{Id}")
-	public String Create(@PathVariable Long Id, User newUser){
+	public String Update(@PathVariable Long Id, User updatedUser, HttpSession session){
 		User user = userRepository.findOne(Id);
-		System.out.println(Id);
-		user.update(newUser);
+		User loginUser = (User)session.getAttribute("loginUser");
+		if(loginUser == null){
+			return "redirect:/users/loginForm";
+		}
+		if(!loginUser.getUserId().equals(user.getUserId())){
+			return "redirect:/";
+		}
+		
+		user.update(updatedUser);
 		userRepository.save(user);
 		return "redirect:/users";
 	}
@@ -73,4 +89,5 @@ public class UserContorller {
 		session.removeAttribute("loginUser");
 		return "redirect:/";
 	}
+	
 }
